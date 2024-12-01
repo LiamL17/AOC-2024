@@ -1,4 +1,4 @@
-package main
+package Day1
 
 import (
 	"bufio"
@@ -16,8 +16,8 @@ func check(e error) {
 	}
 }
 
-func main() {
-	file, err := os.Open("Day-1\\input1.txt")
+func Run() {
+	file, err := os.Open("days/day1/input1.txt")
 	check(err)
 	defer file.Close()
 

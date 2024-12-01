@@ -48,14 +48,29 @@ func main() {
 	slices.Sort(array1)
 	slices.Sort(array2)
 
+	occurs := getOccurences(array2)
+
 	total := 0
+	total2 := 0
 	for index, element := range array1 {
 		diff := array2[index] - element
-		if (diff < 0) {
+		if diff < 0 {
 			diff = diff * -1
 		}
 		total += diff
+
+		total2 += element * occurs[element]
 	}
 
 	fmt.Println("Total:", total)
+	fmt.Println("Total Part 2:", total2)
+}
+
+func getOccurences(array []int) map[int]int {
+	occurences := make(map[int]int)
+	for _, element := range array {
+		occurences[element]++
+	}
+
+	return occurences
 }

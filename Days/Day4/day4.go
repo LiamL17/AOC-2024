@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"regexp"
 	"strings"
 )
 
@@ -72,6 +73,23 @@ func countVertical(grid [][]string) int {
 
 func partTwo(grid [][]string) int {
 	count := 0
+	regex := regexp.MustCompile("M.S.A.M.S|M.M.A.S.S|S.M.A.S.M|S.S.A.M.M")
+
+	for row := 0; row < len(grid)-2; row++ {
+		for col := 0; col < len(grid[row])-2; col++ {
+			str := ""
+
+			for i := 0; i <= 2; i++ {
+				for j := 0; j <= 2; j++ {
+					str += grid[row+i][col+j]
+				}
+			}
+
+			if regex.FindStringIndex(str) != nil {
+				count++
+			}
+		}
+	}
 
 	return count
 }
@@ -118,6 +136,6 @@ func countDiagonal(grid [][]string) int {
 		count += countInString(diagonal)
 	}
 
-    fmt.Printf("Diagonal Count: %d\n", count)
+	fmt.Printf("Diagonal Count: %d\n", count)
 	return count
 }

@@ -14,7 +14,8 @@ func check(e error) {
 }
 
 func Run() {
-	file, err := os.Open("days/day4/test.txt")
+
+	file, err := os.Open("days/day4/input.txt")
 	check(err)
 	defer file.Close()
 
@@ -38,8 +39,7 @@ func partOne(grid [][]string) int {
 
 	count += countHorizontal(grid)
 	count += countVertical(grid)
-	count += countDiagonalForward(grid)
-	count += countDiagonalBackward(grid)
+	count += countDiagonal(grid)
 
 	return count
 }
@@ -70,45 +70,6 @@ func countVertical(grid [][]string) int {
 	return count
 }
 
-func countDiagonalForward(grid [][]string) int {
-	count := 0
-
-	for row := 0; row < len(grid)-3; row++ {
-		for col := 0; col < len(grid[row])-3; col++ {
-			str := ""
-			for diag := 0; diag < 4; diag++ {
-				str += grid[row+diag][col+diag]
-			}
-            // fmt.Println("forward: ", str)
-			if str == "XMAS" || str == "SAMX" {
-				count++
-			}
-		}
-	}
-
-	fmt.Printf("Diagonal forward Count: %d\n", count)
-	return count
-}
-
-func countDiagonalBackward(grid [][]string) int {
-	count := 0
-	for row := len(grid) - 1; row >= 3; row-- {
-		for col := len(grid[row]) - 1; col >= 3; col-- {
-			str := ""
-			for diag := 0; diag < 4; diag++ {
-				str += grid[row-diag][col-diag]
-			}
-            // fmt.Println("backward: ", str)
-			if str == "XMAS" || str == "SAMX" {
-				count++
-			}
-		}
-	}
-
-	fmt.Printf("Diagonal backward Count: %d\n", count)
-	return count
-}
-
 func partTwo(grid [][]string) int {
 	count := 0
 
@@ -125,5 +86,38 @@ func countInString(str string) int {
 		}
 	}
 
+	return count
+}
+
+func countDiagonal(grid [][]string) int {
+	count := 0
+	rows := len(grid)
+	cols := len(grid[0])
+
+	// Diagonal top-left to bottom-right
+	for start := 0; start < rows+cols-1; start++ {
+		diagonal := ""
+		for i := 0; i < rows; i++ {
+			j := start - i
+			if j >= 0 && j < cols {
+				diagonal += string(grid[i][j])
+			}
+		}
+		count += countInString(diagonal)
+	}
+
+	// Diagonal top-right to bottom-left
+	for start := 0; start < rows+cols-1; start++ {
+		diagonal := ""
+		for i := 0; i < rows; i++ {
+			j := start - (rows - 1 - i)
+			if j >= 0 && j < cols {
+				diagonal += string(grid[i][j])
+			}
+		}
+		count += countInString(diagonal)
+	}
+
+    fmt.Printf("Diagonal Count: %d\n", count)
 	return count
 }

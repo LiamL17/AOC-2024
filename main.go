@@ -1,6 +1,7 @@
 package main
 
 import (
+	day4 "aoc-2024/Days/Day4"
 	"aoc-2024/days/day1"
 	"aoc-2024/days/day10"
 	"aoc-2024/days/day11"
@@ -20,7 +21,6 @@ import (
 	"aoc-2024/days/day24"
 	"aoc-2024/days/day25"
 	"aoc-2024/days/day3"
-	"aoc-2024/days/day4"
 	"aoc-2024/days/day5"
 	"aoc-2024/days/day6"
 	"aoc-2024/days/day7"

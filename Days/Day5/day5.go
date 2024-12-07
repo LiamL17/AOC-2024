@@ -40,8 +40,8 @@ func Run() {
 		}
 	}
 
-	fmt.Println(updates)
-	fmt.Println(rules)
+	// fmt.Println(updates)
+	// fmt.Println(rules)
 
 	total := 0
 	total2 := 0
@@ -62,7 +62,7 @@ func Run() {
 }
 
 func invalidFixed(update []int, rules map[int][]int) int {
-    // fmt.Println("Update fixing:", update)
+	// fmt.Println("Update fixing:", update)
 	if validUpdate(update, rules) {
 		return update[len(update)/2]
 	}
@@ -82,7 +82,7 @@ func invalidFixed(update []int, rules map[int][]int) int {
 
 	}
 	// return newUpdate
-    return invalidFixed(update, rules)
+	return invalidFixed(update, rules)
 }
 
 func validUpdate(update []int, rules map[int][]int) bool {

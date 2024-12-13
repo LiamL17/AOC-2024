@@ -42,9 +42,10 @@ func Run() {
 	// fmt.Println("Start: (", startRow, ",", startCol, ")")
 
 	count := countGuardSteps(grid, startRow, startCol)
+	count2 := 0
 
 	fmt.Println("Total part 1:", count)
-	// fmt.Println("Total part 2:", total2)
+	fmt.Println("Total part 2:", count2)
 
 }
 
@@ -109,4 +110,29 @@ func getStart(grid [][]string) (int, int) {
 	}
 
 	return -1, -1
+}
+
+func possibleLoops(grid [][]string, row int, col int) int {
+	count := 0
+	for i := 0; i < len(grid); i++ {
+		for j := 0; j < len(grid[0]); j++ {
+			if i == row && j == col {
+				continue
+			}
+
+			if grid[i][j] == "#" {
+				continue
+			}
+
+			gridCopy := make([][]string, len(grid))
+			copy(gridCopy, grid)
+			gridCopy[i][j] = "#"
+
+			// if willInifiniteLoop(gridCopy) {
+			// 	count++
+			// }
+		}
+	}
+
+	return count
 }
